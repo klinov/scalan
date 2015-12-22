@@ -7,7 +7,7 @@ package sharedptr
 import scala.lms.common._
 import scalan.compilation.lms.common._
 
-class CxxCoreCodegen[BackendCake <: LmsBackendFacade with JNILmsOpsExp](backend: BackendCake) extends BaseCodegen[BackendCake]
+class CxxCoreCodegen[BackendCake <: LmsBackendFacade with JNILmsOpsExp with CxxMethodCallOpsExp](backend: BackendCake) extends BaseCodegen[BackendCake]
   with CxxShptrCodegen
   with CLikeGenEqual
   with CLikeGenPrimitiveOps
@@ -33,6 +33,7 @@ class CxxCoreCodegen[BackendCake <: LmsBackendFacade with JNILmsOpsExp](backend:
   with CxxShptrGenStringOps
   with CxxShptrGenEitherOps
   with CxxShptrGenIterableOps
+  with CxxShptrGenMethodCallOps
   {
     override val IR: BackendCake = backend
     import IR._
@@ -42,6 +43,6 @@ class CxxCoreCodegen[BackendCake <: LmsBackendFacade with JNILmsOpsExp](backend:
   override def shouldApplyFusion(currentScope: List[Stm])(result: List[Exp[Any]]): Boolean = true
 }
 
-class CoreCxxShptrLmsBackend extends CoreLmsBackend with JNILmsOpsExp { self =>
+class CoreCxxShptrLmsBackend extends CoreLmsBackend with JNILmsOpsExp with CxxMethodCallOpsExp { self =>
   override val codegen = new CxxCoreCodegen[self.type](self)
 }

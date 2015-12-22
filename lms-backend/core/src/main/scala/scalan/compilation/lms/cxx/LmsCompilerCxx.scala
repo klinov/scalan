@@ -5,9 +5,9 @@ import java.io._
 import scalan.ScalanDslExp
 import scalan.compilation.GraphVizConfig
 import scalan.compilation.lms.LmsCompiler
-import scalan.compilation.lms.cxx.sharedptr.CoreCxxShptrLmsBackend
+import scalan.compilation.lms.cxx.sharedptr.{CoreBridgeCxx, CoreCxxShptrLmsBackend}
 
-class LmsCompilerCxx[ScalanCake <: ScalanDslExp](_scalan: ScalanCake) extends LmsCompiler(_scalan) {
+class LmsCompilerCxx[ScalanCake <: ScalanDslExp](_scalan: ScalanCake) extends LmsCompiler(_scalan) with CoreBridgeCxx {
   import scalan._
   val lms = new CoreCxxShptrLmsBackend
 
