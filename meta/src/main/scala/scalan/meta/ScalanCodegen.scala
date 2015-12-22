@@ -857,7 +857,7 @@ object ScalanCodegen extends SqlCompiler with ScalanAstExtensions {
           |      View${e.name}(arr, compIso)
           |
           |    // Rule: W(a).m(args) ==> iso.to(a.m(unwrap(args)))
-          |    case mc @ MethodCall(Def(wrapper: Exp${e.name}Impl[_]), m, args, neverInvoke) if !isValueAccessor(m) =>
+          |    case mc @ MethodCall(Def(wrapper: Exp${e.name}Impl[_]), m, args, neverInvoke) if !isWrappedValueAccessor(m) =>
           |      val resultElem = mc.selfType
           |      val wrapperIso = getIsoByElem(resultElem)
           |      wrapperIso match {
