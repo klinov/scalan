@@ -224,7 +224,7 @@ object ScalanCodegen extends SqlCompiler with ScalanAstExtensions {
       val allArgs = md.allArgs
       s"""
         |    ${md.declaration(config, false)} =
-        |      newObjEx(classOf[$typeUse], List(${allArgs.rep(a => s"${a.name}.asRep[Any]")}))
+        |      newObjEx[$typeUse](${allArgs.rep(_.name)})
         |""".stripMargin
     }
 
