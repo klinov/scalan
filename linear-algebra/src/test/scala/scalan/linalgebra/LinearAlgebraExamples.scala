@@ -351,6 +351,38 @@ trait LinearAlgebraExamples extends MatricesDsl {
     vC.reduce
   }
 
+  def ddvva = fun { xs: Rep[Array[Double]] =>
+    val vD = DenseVector(Collection(xs))
+    val ddres = (vD +^ vD).items.lst
+    ddres
+  }
+
+  def dsvva = fun { xs: Rep[Array[Double]] =>
+    val len = xs.length
+    val inds = SArray.rangeFrom0(len)
+    val vD = DenseVector(Collection(xs))
+    val vS = SparseVector(Collection(inds), Collection(xs), len)
+    val dsres = (vD +^ vS).items.lst
+    dsres
+  }
+
+  def sdvva = fun { xs: Rep[Array[Double]] =>
+    val len = xs.length
+    val inds = SArray.rangeFrom0(len)
+    val vD = DenseVector(Collection(xs))
+    val vS = SparseVector(Collection(inds), Collection(xs), len)
+    val sdres = (vS +^ vD).items.lst
+    sdres
+  }
+
+  def ssvva = fun { xs: Rep[Array[Double]] =>
+    val len = xs.length
+    val inds = SArray.rangeFrom0(len)
+    val vS = SparseVector(Collection(inds), Collection(xs), len)
+    val ssres = (vS +^ vS).items.lst
+    ssres
+  }
+
   lazy val denseVector = fun { p: Rep[Array[Double]] =>
     DenseVector(Collection(p))
   }

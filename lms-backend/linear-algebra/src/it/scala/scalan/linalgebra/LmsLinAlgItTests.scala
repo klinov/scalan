@@ -279,4 +279,25 @@ class VectorMethodsItTests extends LmsLinAlgItTests {
   test("sumConvertSum") {
     compareOutputWithSequential(_.sumConvertSum, progStagedOnly)(Array(1.0, 2.0, 4.0))
   }
+
+  test("Ddvva") {
+    compareOutputWithSequential(_.ddvva, progStagedOnly)(Array(1.0, 2.0, 4.0))
+  }
+
+  test("Dsvva") {
+    // fails as it:test with List(4.0, 8.0, 16.0) did not equal List(2.0, 4.0, 8.0)
+    // but works as run generated code
+    compareOutputWithSequential(_.dsvva, progStagedOnly)(Array(1.0, 2.0, 4.0))
+  }
+
+  test("Sdvva") {
+    // fails as it:test with List(4.0, 8.0, 16.0) did not equal List(2.0, 4.0, 8.0)
+    // but works as run generated code
+    compareOutputWithSequential(_.sdvva, progStagedOnly)(Array(1.0, 2.0, 4.0))
+  }
+
+  test("Ssvva") {
+    // fails with scalan.Base$StagingException: LMS method arrayOuterJoin not found
+    compareOutputWithSequential(_.ssvva, progStagedOnly)(Array(1.0, 2.0, 4.0))
+  }
 }
